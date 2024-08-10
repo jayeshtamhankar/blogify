@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} blogify {% endblock %}
+
+{% block contant %}
+    <main>
+        <h1>Home</h1>
+
+        <ul class="blog-list">
+            {% for blog in blog_posts %}
+                <li class="blog_post" id="{{ blog.blog_id }}">
+                    {{ blog.blog_title }} <br> <br>
+                    {{ blog.blog_author }} <br> <br>
+                    {{ blog.publish_data }} <br> <br>
+                    {{ blog.blog_introduction }} <br> <br>
+                    {{ blog.blog_content }} <br> <br>
+                    {{ blog.blog_conclusion }} <br> <br>
+
+                    <a href="{{ url_for('view_blog', blog_id=blog.blog_id) }}">Read More</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}

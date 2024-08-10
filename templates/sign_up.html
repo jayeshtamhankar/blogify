@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} blogify | Sign Up {% endblock %}
+
+{% block contant %}
+    <main>
+        <h1>Sign Up</h1>
+
+        <form action="{{ url_for('sign_up_form') }}" method="POST">
+            <label for="name">name</label>
+            <input type="text" name="Name" id="name" autocomplete="off">
+            <label for="gender">gender</label>
+            <input type="text" name="Gender" id="gender" autocomplete="off">
+            <label for="date-of-birth"">date of birth</label>
+            <input type="date" name="Date_Of_Birth" id="date-of-birth">
+            <label for="contact-number">contact number</label>
+            <input type="text" name="Contact_Number" id="contact-number" autocomplete="off">
+            <label for="email">email</label>
+            <input type="text" name="Email" id="email" autocomplete="off">
+            <label for="username">username</label>
+            <input type="text" name="Username" id="username" autocomplete="off">
+            <label for="password">password</label>
+            <input type="text" name="Password" id="password" autocomplete="off">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="text" name="Confirm_Password" id="confirm-password" autocomplete="off">
+            <button type="submit">sign up</button>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert-{{ category }}">
+                        {% if category  == 'error' %}
+                            <span class="material-symbols-rounded icon">
+                                error
+                            </span>
+                        {% elif category  == 'warning' %}
+                            <span class="material-symbols-rounded icon">
+                                warning
+                            </span>
+                        {% else %}
+                            <span class="material-symbols-rounded icon">
+                                info
+                            </span>
+                        {% endif %}
+
+                        <span class="txt">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </main>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} blogify | profile {% endblock %}
+
+{% block contant %}
+    <main>
+        <h1>Edit Profile</h1>
+
+
+        <h1>Edit Basic Details</h1>
+        <p>{{ user.name }}</p>
+        <P>{{ user.gender }}</P>
+        <p>{{ user.date_of_birth }}</p>
+
+        {% include 'edit_basic_details.html' %}
+    </main>
+{% endblock %}

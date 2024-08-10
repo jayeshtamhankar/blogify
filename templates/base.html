@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %} blogify {% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}">Home</a>
+
+        {% if not session.get('logged_in') %} 
+            <a href="{{ url_for('sign_up') }}">Sign Up</a>
+            <a href="{{ url_for('sign_in') }}">Sign In</a>
+        {% endif %}
+
+        {% if session.get('logged_in') %}
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('sign_out') }}">Sign Out</a>
+        {% endif %}
+
+    </header>
+    {% block contant %}
+        Test
+    {% endblock %}
+    <footer></footer>
+</body>
+</html>

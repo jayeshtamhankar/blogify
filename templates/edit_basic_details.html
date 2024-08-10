@@ -1,0 +1,12 @@
+{% block contant %}
+    <h1>Edit Profile Form</h1>
+    <form action="{{ url_for('edit_basic_details') }}" method="POST">
+        <label for="name">name</label>
+        <input type="text" name="Name" id="name" value="{{ user.name }}" autocomplete="off">
+        <label for="gender">gender</label>
+        <input type="text" name="Gender" id="gender" value="{{ user.gender }}" autocomplete="off">
+        <label for="date-of-birth"">date of birth</label>
+        <input type="date" name="Date_Of_Birth" id="date-of-birth" value="{{ user.date_of_birth }}" autocomplete="off">
+        <button type="submit">Save Changes</button>
+    </form>
+{% endblock %}

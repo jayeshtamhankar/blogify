@@ -1,0 +1,9 @@
+label, input {
+    display: block;
+}
+
+header {
+    a {
+        margin: 1rem 1.5rem;
+    }
+}

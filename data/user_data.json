@@ -1,0 +1,36 @@
+[
+    {
+        "user id": "GF2yCCFe1722938496479",
+        "name": "Jane Smith",
+        "gender": "Female",
+        "date_of_birth": "1985-08-22",
+        "contact_number": "555-5678",
+        "email": "janesmith@example.com",
+        "username": "janesmith",
+        "password": "$2b$12$SVNlJVmho4yeG56LdK0LAuNDS6n2X6zKLjB9wp0GiyxgsG6mkwhDO",
+        "createdAt": "06/08/24-15:31:36"
+    },
+    {
+        "user id": "zKZu4aOk1722938840724",
+        "name": "John Doe",
+        "gender": "Male",
+        "date_of_birth": "1990-05-15",
+        "contact_number": "555-1234",
+        "email": "johndoe@example.com",
+        "username": "johndoe",
+        "password": "$2b$12$vyzkCCLGKCaheYiSl53tZOIMWxeU9xtv43lgdjWeZ1M7NW4MUZSey",
+        "createdAt": "06/08/24-15:37:20",
+        "updated_at": "07/08/24-15:55:31"
+    },
+    {
+        "user id": "INaEwajS1723111580179",
+        "name": "Robert Brown",
+        "gender": "Male",
+        "date_of_birth": "1978-11-30",
+        "contact_number": "555-9876",
+        "email": "robertbrown@example.com",
+        "username": "robertbrown",
+        "password": "$2b$12$CAuVKvbWEBQ1RnCDTC1YKuSha0P0oA07f1lsHaMbjDsng0RdDrwSu",
+        "createdAt": "08/08/24-15:36:20"
+    }
+]
