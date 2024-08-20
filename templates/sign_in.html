@@ -3,39 +3,43 @@
 {% block title %} blogify | Sign In {% endblock %}
 
 {% block contant %}
-    <main>
-        <h1>Sign In</h1>
-
-        <form action="{{ url_for('sign_in_form') }}" method="POST">
-            <label for="username">username</label>
-            <input type="text" name="Username" id="username" autocomplete="off">
-            <label for="password">password</label>
-            <input type="text" name="Password" id="password" autocomplete="off">
-            <button type="submit">sign in</button>
-        </form>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert-{{ category }}">
-                        {% if category  == 'error' %}
-                            <span class="material-symbols-rounded icon">
-                                error
-                            </span>
-                        {% elif category  == 'warning' %}
-                            <span class="material-symbols-rounded icon">
-                                warning
-                            </span>
-                        {% else %}
-                            <span class="material-symbols-rounded icon">
-                                info
-                            </span>
-                        {% endif %}
-
-                        <span class="txt">{{ message }}</span>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    <main class="sign-in">
+        <div class="wrapper">
+            <div class="sign-in-form">
+                <h1>Sign In</h1>
+        
+                <form action="{{ url_for('sign_in_form') }}" method="POST">
+                    <label for="username">username</label>
+                    <input type="text" name="Username" id="username" autocomplete="off">
+                    <label for="password">password</label>
+                    <input type="text" name="Password" id="password" autocomplete="off">
+                    <button type="submit">sign in</button>
+                </form>
+        
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert-{{ category }}">
+                            {% if category  == 'error' %}
+                                <span class="material-symbols-rounded icon">
+                                    error
+                                </span>
+                            {% elif category  == 'warning' %}
+                                <span class="material-symbols-rounded icon">
+                                    warning
+                                </span>
+                            {% else %}
+                                <span class="material-symbols-rounded icon">
+                                    info
+                                </span>
+                            {% endif %}
+    
+                            <span class="txt">{{ message }}</span>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
     </main>
 {% endblock %}

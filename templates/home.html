@@ -3,22 +3,29 @@
 {% block title %} blogify {% endblock %}
 
 {% block contant %}
-    <main>
-        <h1>Home</h1>
+    <main class="home">
+        <div class="wrapper">
+            <div class="greet-user">
+                {% if session.get('logged_in') %}
+                    <h1>Hello, {{ user['name'] }}</h1>
 
-        <ul class="blog-list">
-            {% for blog in blog_posts %}
-                <li class="blog_post" id="{{ blog.blog_id }}">
-                    {{ blog.blog_title }} <br> <br>
-                    {{ blog.blog_author }} <br> <br>
-                    {{ blog.publish_data }} <br> <br>
-                    {{ blog.blog_introduction }} <br> <br>
-                    {{ blog.blog_content }} <br> <br>
-                    {{ blog.blog_conclusion }} <br> <br>
-
-                    <a href="{{ url_for('view_blog', blog_id=blog.blog_id) }}">Read More</a>
-                </li>
-            {% endfor %}
-        </ul>
+                {% else %}
+                    <h1>Hello, Guest</h1>
+                {% endif %}
+            </div>
+            <section class="all-blogs">
+                <div>
+                    <h1 class="">All Blogs</h1>
+                </div>
+                <ul class="blog-list">
+                    {% for blog in blog %}
+                        <li class="blog_post" id="{{ blog['head']['blog_id'] }}">
+                            <h1 class="blog-title"> {{ blog['body']['title'] }} </h1>
+                            <a class="blog-link" href="{{ url_for('view_blog', blog_id=blog['head']['blog_id']) }}">Read More</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
     </main>
 {% endblock %}

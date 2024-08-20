@@ -1,3 +1,5 @@
+app.py
+
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from config import Config
 import bcrypt
@@ -383,4 +385,118 @@ def view_user(username=None):
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=2525,  debug=True)
 
+config.py
 
+import os 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class Config:
+    SECRET_KEY = os.environ['SECRET_KEY']
+
+data.py
+
+import os
+import json
+
+USER_DATA = 'data/user_data.json'
+BLOG_DATA = 'data/blog_data.json'
+
+def file_initialization(file_path):
+    if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+        with open(file_path, 'w') as data_file:
+            json.dump([], data_file, indent=4)
+        return True
+    return False
+
+
+def read_user_data():
+    try:
+        file_initialization(USER_DATA)
+        with open(USER_DATA, 'r') as file:
+            user_data = json.load(file)
+            if not user_data:
+                user_data = [{'users': []}]
+            return user_data
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return [{'users': []}]
+
+def write_user_data(data):
+    try:
+        file_initialization(USER_DATA)
+        with open(USER_DATA, 'w') as file:
+            json.dump(data, file, indent=4)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+def read_blog_data():
+    try:
+        file_initialization(BLOG_DATA)
+        with open(BLOG_DATA, 'r') as file:
+            blog_data = json.load(file)
+            if not blog_data:
+                blog_data = [{'blogs': []}]
+            return blog_data
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return [{'blogs': []}]
+
+def write_blog_data(data):
+    try:                        
+        file_initialization(BLOG_DATA)
+        with open(BLOG_DATA, 'w') as file:
+            json.dump(data, file, indent=4)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+helpers.py
+
+import random
+import string
+import time
+from datetime import datetime
+from data import read_blog_data, read_user_data
+
+def generate_id():
+    length = 8
+    characters = string.ascii_letters + string.digits
+    random_string = ''.join(random.choice(characters) for _ in range(length))
+    time_stamp = str(int(time.time() * 1000))
+    unique_id = random_string + time_stamp
+    return unique_id
+
+def time_stamp():
+    current_time = datetime.now()
+    stamp = current_time.strftime('%d/%m/%y-%H:%M:%S')
+    return stamp
+
+
+def get_user_data(user_id=None, username=None):
+    user_data = read_user_data()
+    
+    for user_container in user_data:
+        for user in user_container['users']:
+            if user['user_id'] == user_id:
+                return user
+            elif user['username'] == username:
+                return user
+    return None
+
+def get_blog_data(blog_id=None):
+    blog_data = read_blog_data ()
+    
+    if blog_id:
+        for blog_container in blog_data:
+            for blog in blog_container['blogs']:
+                if blog['head']['blog_id'] == blog_id:
+                    blog['head']['publish_data'] = datetime.strptime(blog['head']['publish_data'], '%d/%m/%y-%H:%M:%S').strftime("%d/%m/%Y")
+                    return blog  # Return a single blog dictionary
+    else:
+        all_blogs = []
+        for blog_container in blog_data:
+            for blog in blog_container['blogs']:
+                blog['head']['publish_data'] = datetime.strptime(blog['head']['publish_data'], '%d/%m/%y-%H:%M:%S').strftime("%d/%m/%Y")
+                all_blogs.append(blog)
+        return all_blogs

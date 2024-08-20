@@ -16,10 +16,13 @@ def read_user_data():
     try:
         file_initialization(USER_DATA)
         with open(USER_DATA, 'r') as file:
-            return json.load(file)
+            user_data = json.load(file)
+            if not user_data:
+                user_data = [{'users': []}]
+            return user_data
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-        return []
+        return [{'users': []}]
 
 def write_user_data(data):
     try:

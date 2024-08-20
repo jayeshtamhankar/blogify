@@ -3,20 +3,23 @@
 {% block title %} blogify | {{ blog['body']['title'] }} {% endblock %}
 
 {% block contant %}
-    <main>
-        <h1>Blogify View Blog</h1>
+    <main class="main">
+        <div class="wrapper">
+            <a href="{{ url_for('view_user', username=author.username) }}">     
+                <p>{{ author.name }}</p>
+                <p>{{ author.username }}</p>
+            </a>
 
-
-        <h1>{{ blog['body']['title'] }}</h1>
-        <h4>{{ blog['body']['author'] }}</h4>
-        <p>{{ blog['body']['introduction'] }}</p>
-        <p>{{ blog['body']['content'] }}</p>
-        <p>{{ blog['body']['conclusion'] }}</p>
-
-        {% if session.get('logged_in') and  session.get('user_id') == blog['head']['author_id'] %}
-            <a href="{{ url_for('edit_blog', blog_id=blog['head']['blog_id']) }}">Edit Blog</a>
-            <a href="{{ url_for('delete_blog', blog_id=blog['head']['blog_id']) }}">Delete Blog</a>
-        {% endif %}
-
+            <h1>{{ blog['body']['title'] }}</h1>
+            <h4>{{ blog['body']['author'] }}</h4>
+            <p>{{ blog['body']['introduction'] }}</p>
+            <p>{{ blog['body']['content'] }}</p>
+            <p>{{ blog['body']['conclusion'] }}</p>
+    
+            {% if session.get('logged_in') and session.get('user_id') == blog['head']['author_id'] %}
+                <br> <br> <a href="{{ url_for('edit_blog', blog_id=blog['head']['blog_id']) }}">Edit Blog</a> <br> <br>
+                <br> <br> <a href="{{ url_for('delete_blog', blog_id=blog['head']['blog_id']) }}">Delete Blog</a> <br> <br>
+            {% endif %}
+        </div>
     </main>
 {% endblock %}
